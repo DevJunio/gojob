@@ -1,8 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"gojob/router"
+)
 
 func main()  {
-	fmt.Print("yay")
+	router.Initialize()
 }
 
