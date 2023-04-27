@@ -5,6 +5,9 @@ import "github.com/gin-gonic/gin"
 func Initialize() {
 	route := gin.Default()
 	initializeRoute(route)
-	route.Run(":8080")
+	err := route.Run(":8080")
+	if err != nil {
+		panic("error: initializing route on router.go")
+		return
+	}
 }
-
