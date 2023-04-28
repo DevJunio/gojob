@@ -11,3 +11,15 @@ func Initialize() {
 		return
 	}
 }
+
+func setDefaultRoute(path []string, route string) string {
+	var p = ""
+
+	if len(path) > 0 {
+		p = path[0]
+	} else {
+		p = route
+	}
+
+	return p
+}

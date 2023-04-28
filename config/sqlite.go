@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"gojob/schemas"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -9,7 +10,8 @@ import (
 
 func InitializeSQLite() (*gorm.DB, error) {
 	logger := GetLogger("sqlite")
-	dbPath := ".\\db\\main.db"
+	dbDir := "./db"
+	dbPath := fmt.Sprint(dbDir, "/main.db")
 
 	// Check if database file exists
 	_, err := os.Stat(dbPath)
@@ -17,7 +19,7 @@ func InitializeSQLite() (*gorm.DB, error) {
 		logger.Info("database file not found, creating a new one...")
 
 		// Create the database file and directory
-		err = os.MkdirAll(".\\db", os.ModePerm)
+		err = os.MkdirAll(dbDir, os.ModePerm)
 		if err != nil {
 			return nil, err
 		}
