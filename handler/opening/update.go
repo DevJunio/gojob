@@ -8,6 +8,20 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @BasePath /api/v0
+
+// @Summary Update opening
+// @Description Update a job opening
+// @Tags Openings
+// @Accept json
+// @Produce json
+// @Param id query string true "Opening Identification"
+// @Param opening body UpdateOpeningRequest true "Opening data to Update"
+// @Success 200 {object} UpdateOpeningResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /openings [patch]
 func UpdateOpeningHandler(ctx *gin.Context) {
 	request := handler.UpdateOpeningRequest{}
 

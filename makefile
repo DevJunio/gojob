@@ -2,7 +2,7 @@
 
 APP_NAME=gojob
 
-default: run-with-docs
+default: run
 
 run:
 	@go run main.go
