@@ -5,8 +5,7 @@ WORKDIR /app
 COPY . .
 
 # Install necessary system dependencies for CGo
-RUN apt-get update && apt-get install -y gcc
-
+RUN apt-get update && apt-get install -y gcc cgo
 
 RUN go build -o gojob
 
