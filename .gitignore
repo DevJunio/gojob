@@ -15,5 +15,12 @@
 # vendor/
 .idea/
 
+# Compiled Binary
+gojob
+
+# Environment variables
+.env
+.env.local
+
 # DB
 db/
