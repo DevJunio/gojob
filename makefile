@@ -1,21 +1,23 @@
 .PHONY: default run build test docs clean
 
-APP_NAME=gojob
+APP_NAME = gojob
 
 default: run
 
-run:
-	@go run main.go
-run-with-docs:
-	@swag init
-	@go run main.go
-build:
+run: build
+	@./$(APP_NAME)
+
+build: clean
 	@go build -o $(APP_NAME) main.go
+
 test:
-	@go test ./ ...
-docs:
+	@go test ./...
+
+docs: clean-all
 	@swag init
+
 clean:
 	@rm -f $(APP_NAME)
-	@rm -rf ./docs
 
+clean-all: clean
+	@rm -rf docs

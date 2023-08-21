@@ -1,23 +1,32 @@
 package main
 
 import (
-	"gojob/config"
-	"gojob/router"
+	"github.com/devjunio/gojob/config"
+	"github.com/devjunio/gojob/repository"
+	"github.com/devjunio/gojob/router"
+	"github.com/joho/godotenv"
 )
 
 var (
-	logger *config.Logger
+	log *config.Logger
 )
 
 func main() {
-	logger = config.GetLogger("main")
+	log = config.SetLogger("main")
 
-	// Initialize the config
-	err := config.Init()
-	if err != nil {
-		logger.Errorf("config initialization error: %v", err)
+	if err := godotenv.Load(".env"); err != nil {
+		log.Info("No .env found")
+	}
+
+	if err := repository.InitDatabase(); err != nil {
+		log.Errorf("database initialization error: %v", err)
 		return
 	}
 
-	router.Initialize()
+	if err := router.Initialize(); err != nil {
+		log.Errorf("router initialization error: %v", err)
+		return
+	}
+
+	repository.InitLogger()
 }

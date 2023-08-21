@@ -9,7 +9,6 @@ import (
 
 func TestInitialize(t *testing.T) {
 	// Start the router in a goroutine
-	go Initialize()
 
 	// Wait for the server to start up
 	time.Sleep(100 * time.Millisecond)

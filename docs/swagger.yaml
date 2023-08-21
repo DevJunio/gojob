@@ -1,5 +1,5 @@
 definitions:
-  handler.CreateOpeningRequest:
+    model.OpeningRequest:
     properties:
       company:
         type: string
@@ -14,66 +14,7 @@ definitions:
       salary:
         type: integer
     type: object
-  handler.CreateOpeningResponse:
-    properties:
-      data:
-        $ref: '#/definitions/schemas.OpeningResponse'
-      message:
-        type: string
-    type: object
-  handler.DeleteOpeningResponse:
-    properties:
-      data:
-        $ref: '#/definitions/schemas.OpeningResponse'
-      message:
-        type: string
-    type: object
-  handler.ErrorResponse:
-    properties:
-      errorCode:
-        type: string
-      message:
-        type: string
-    type: object
-  handler.ListOpeningsResponse:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/schemas.OpeningResponse'
-        type: array
-      message:
-        type: string
-    type: object
-  handler.ShowOpeningResponse:
-    properties:
-      data:
-        $ref: '#/definitions/schemas.OpeningResponse'
-      message:
-        type: string
-    type: object
-  handler.UpdateOpeningRequest:
-    properties:
-      company:
-        type: string
-      link:
-        type: string
-      location:
-        type: string
-      remote:
-        type: boolean
-      role:
-        type: string
-      salary:
-        type: integer
-    type: object
-  handler.UpdateOpeningResponse:
-    properties:
-      data:
-        $ref: '#/definitions/schemas.OpeningResponse'
-      message:
-        type: string
-    type: object
-  schemas.OpeningResponse:
+    model.OpeningResponse:
     properties:
       company:
         type: string
@@ -94,6 +35,13 @@ definitions:
       salary:
         type: integer
       updatedAt:
+          type: string
+    type: object
+    router.ErrorResponse:
+        properties:
+            errorCode:
+                type: string
+            message:
         type: string
     type: object
 info:
@@ -116,15 +64,15 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handler.DeleteOpeningResponse'
+              $ref: '#/definitions/model.OpeningResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+              $ref: '#/definitions/router.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+              $ref: '#/definitions/router.ErrorResponse'
       summary: Delete opening
       tags:
       - Openings
@@ -138,11 +86,13 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handler.ListOpeningsResponse'
+              items:
+                  $ref: '#/definitions/model.OpeningResponse'
+              type: array
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+              $ref: '#/definitions/router.ErrorResponse'
       summary: List Openings
       tags:
       - Openings
@@ -161,26 +111,26 @@ paths:
         name: opening
         required: true
         schema:
-          $ref: '#/definitions/handler.UpdateOpeningRequest'
+            $ref: '#/definitions/model.OpeningRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handler.UpdateOpeningResponse'
+              $ref: '#/definitions/model.OpeningResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+              $ref: '#/definitions/router.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+              $ref: '#/definitions/router.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+              $ref: '#/definitions/router.ErrorResponse'
       summary: Update opening
       tags:
       - Openings
@@ -189,57 +139,53 @@ paths:
       - application/json
       description: Create a new job opening
       parameters:
-      - description: Request body
+          -   description: Opening data to create
         in: body
-        name: request
+            name: opening
         required: true
         schema:
-          $ref: '#/definitions/handler.CreateOpeningRequest'
+            $ref: '#/definitions/model.OpeningRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handler.CreateOpeningResponse'
+              $ref: '#/definitions/model.OpeningResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
-        "500":
-          description: Internal Server Error
+              $ref: '#/definitions/router.ErrorResponse'
+        "404":
+            description: Not Found
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+              $ref: '#/definitions/router.ErrorResponse'
       summary: Create opening
       tags:
       - Openings
-  /openings/{id}:
+  /openings/:id:
     get:
       consumes:
       - application/json
-      description: Show a job opening with id
+      description: Get first opening by ID
       parameters:
       - description: Opening identification
-        in: path
+        in: query
         name: id
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handler.ShowOpeningResponse'
-        "400":
-          description: Bad Request
+              $ref: '#/definitions/model.OpeningResponse'
+        "500":
+            description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/handler.ErrorResponse'
-      summary: Show opening
+              $ref: '#/definitions/router.ErrorResponse'
+      summary: Get Openings
       tags:
       - Openings
 swagger: "2.0"

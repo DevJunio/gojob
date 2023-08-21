@@ -33,13 +33,16 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/handler.ListOpeningsResponse"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.OpeningResponse"
+                            }
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/router.ErrorResponse"
                         }
                     }
                 }
@@ -58,12 +61,12 @@ const docTemplate = `{
                 "summary": "Create opening",
                 "parameters": [
                     {
-                        "description": "Request body",
-                        "name": "request",
+                        "description": "Opening data to create",
+                        "name": "opening",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/handler.CreateOpeningRequest"
+                            "$ref": "#/definitions/model.OpeningRequest"
                         }
                     }
                 ],
@@ -71,19 +74,19 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/handler.CreateOpeningResponse"
+                            "$ref": "#/definitions/model.OpeningResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/router.ErrorResponse"
                         }
                     },
-                    "500": {
-                        "description": "Internal Server Error",
+                    "404": {
+                        "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/router.ErrorResponse"
                         }
                     }
                 }
@@ -113,19 +116,19 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/handler.DeleteOpeningResponse"
+                            "$ref": "#/definitions/model.OpeningResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/router.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/router.ErrorResponse"
                         }
                     }
                 }
@@ -156,7 +159,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/handler.UpdateOpeningRequest"
+                            "$ref": "#/definitions/model.OpeningRequest"
                         }
                     }
                 ],
@@ -164,33 +167,33 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/handler.UpdateOpeningResponse"
+                            "$ref": "#/definitions/model.OpeningResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/router.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/router.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/router.ErrorResponse"
                         }
                     }
                 }
             }
         },
-        "/openings/{id}": {
+        "/openings/:id": {
             "get": {
-                "description": "Show a job opening with id",
+                "description": "Get first opening by ID",
                 "consumes": [
                     "application/json"
                 ],
@@ -200,13 +203,13 @@ const docTemplate = `{
                 "tags": [
                     "Openings"
                 ],
-                "summary": "Show opening",
+                "summary": "Get Openings",
                 "parameters": [
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "Opening identification",
                         "name": "id",
-                        "in": "path",
+                        "in": "query",
                         "required": true
                     }
                 ],
@@ -214,19 +217,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/handler.ShowOpeningResponse"
+                            "$ref": "#/definitions/model.OpeningResponse"
                         }
                     },
-                    "400": {
-                        "description": "Bad Request",
+                    "500": {
+                        "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/router.ErrorResponse"
                         }
                     }
                 }
@@ -234,7 +231,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "handler.CreateOpeningRequest": {
+        "model.OpeningRequest": {
             "type": "object",
             "properties": {
                 "company": {
@@ -257,99 +254,7 @@ const docTemplate = `{
                 }
             }
         },
-        "handler.CreateOpeningResponse": {
-            "type": "object",
-            "properties": {
-                "data": {
-                    "$ref": "#/definitions/schemas.OpeningResponse"
-                },
-                "message": {
-                    "type": "string"
-                }
-            }
-        },
-        "handler.DeleteOpeningResponse": {
-            "type": "object",
-            "properties": {
-                "data": {
-                    "$ref": "#/definitions/schemas.OpeningResponse"
-                },
-                "message": {
-                    "type": "string"
-                }
-            }
-        },
-        "handler.ErrorResponse": {
-            "type": "object",
-            "properties": {
-                "errorCode": {
-                    "type": "string"
-                },
-                "message": {
-                    "type": "string"
-                }
-            }
-        },
-        "handler.ListOpeningsResponse": {
-            "type": "object",
-            "properties": {
-                "data": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/schemas.OpeningResponse"
-                    }
-                },
-                "message": {
-                    "type": "string"
-                }
-            }
-        },
-        "handler.ShowOpeningResponse": {
-            "type": "object",
-            "properties": {
-                "data": {
-                    "$ref": "#/definitions/schemas.OpeningResponse"
-                },
-                "message": {
-                    "type": "string"
-                }
-            }
-        },
-        "handler.UpdateOpeningRequest": {
-            "type": "object",
-            "properties": {
-                "company": {
-                    "type": "string"
-                },
-                "link": {
-                    "type": "string"
-                },
-                "location": {
-                    "type": "string"
-                },
-                "remote": {
-                    "type": "boolean"
-                },
-                "role": {
-                    "type": "string"
-                },
-                "salary": {
-                    "type": "integer"
-                }
-            }
-        },
-        "handler.UpdateOpeningResponse": {
-            "type": "object",
-            "properties": {
-                "data": {
-                    "$ref": "#/definitions/schemas.OpeningResponse"
-                },
-                "message": {
-                    "type": "string"
-                }
-            }
-        },
-        "schemas.OpeningResponse": {
+        "model.OpeningResponse": {
             "type": "object",
             "properties": {
                 "company": {
@@ -383,6 +288,17 @@ const docTemplate = `{
                     "type": "string"
                 }
             }
+        },
+        "router.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "errorCode": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
         }
     }
 }`
@@ -397,6 +313,8 @@ var SwaggerInfo = &swag.Spec{
 	Description:      "",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
+	LeftDelim:        "{{",
+	RightDelim:       "}}",
 }
 
 func init() {

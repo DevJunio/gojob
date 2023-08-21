@@ -1,15 +1,21 @@
-package config
+package repository
 
 import (
 	"fmt"
-	"gojob/schemas"
+	"github.com/devjunio/gojob/config"
+	"github.com/devjunio/gojob/model"
+	"os"
+
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	"os"
 )
 
+type SQLite struct {
+}
+
+//goland:noinspection GoUnusedExportedFunction
 func InitializeSQLite() (*gorm.DB, error) {
-	logger := GetLogger("sqlite")
+	logger := config.SetLogger("sqlite")
 	dbDir := "./db"
 	dbPath := fmt.Sprint(dbDir, "/main.db")
 
@@ -42,7 +48,7 @@ func InitializeSQLite() (*gorm.DB, error) {
 	}
 
 	// Migrate last schema
-	err = db.AutoMigrate(&schemas.Opening{})
+	err = db.AutoMigrate(&model.Opening{})
 	if err != nil {
 		logger.Errorf("sqlite automigration error: %v", err)
 		return nil, err

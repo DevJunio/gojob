@@ -7,7 +7,10 @@ import (
 	"os"
 )
 
-var logName string
+var (
+	logger  *Logger
+	logName string
+)
 
 type Logger struct {
 	debug   *log.Logger
@@ -15,6 +18,11 @@ type Logger struct {
 	warning *log.Logger
 	err     *log.Logger
 	writer  io.Writer
+}
+
+func SetLogger(p string) *Logger {
+	logger = newLogger(p)
+	return logger
 }
 
 func setLog(logInfo string) *log.Logger {
@@ -36,28 +44,35 @@ func newLogger(baseName string) *Logger {
 	}
 }
 
-func (l *Logger) Debug(message ...interface{}) {
-	l.debug.Printf("debug message: %s\n", message...)
-}
-func (l *Logger) Info(message ...interface{}) {
-	l.info.Printf("info message: %s\n", message...)
-}
-func (l *Logger) Warn(message ...interface{}) {
-	l.warning.Printf("warn message: %s\n", message...)
-}
-func (l *Logger) Error(message ...interface{}) {
-	l.err.Printf("error message: %s\n", message...)
+func (l *Logger) SetOutput(w io.Writer) {
+	l.debug.SetOutput(w)
+	l.info.SetOutput(w)
+	l.warning.SetOutput(w)
+	l.err.SetOutput(w)
 }
 
-func (l *Logger) Debugf(format string, message ...interface{}) {
+func (l *Logger) Debug(message any) {
+	l.debug.Printf(fmt.Sprintf("[DEBUG]: %s\n", message))
+}
+func (l *Logger) Info(message any) {
+	l.info.Printf(fmt.Sprintf("[INFO]: %v\n", message))
+}
+func (l *Logger) Warn(message any) {
+	l.warning.Printf(fmt.Sprintf("[WARN]: %s\n", message))
+}
+func (l *Logger) Error(message any) {
+	l.err.Print(fmt.Sprintf("[ERROR]: %s\n", message))
+}
+
+func (l *Logger) Debugf(format string, message ...any) {
 	l.debug.Printf(format, message...)
 }
-func (l *Logger) Warnf(format string, message ...interface{}) {
+func (l *Logger) Warnf(format string, message ...any) {
 	l.warning.Printf(format, message...)
 }
-func (l *Logger) Infof(format string, message ...interface{}) {
+func (l *Logger) Infof(format string, message ...any) {
 	l.info.Printf(format, message...)
 }
-func (l *Logger) Errorf(format string, message ...interface{}) {
+func (l *Logger) Errorf(format string, message ...any) {
 	l.err.Printf(format, message...)
 }
