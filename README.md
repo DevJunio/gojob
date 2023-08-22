@@ -1,10 +1,11 @@
 # Gojob: Your Job Openings Management Solution
 
 Welcome to `gojob` – your advanced RESTful API service built with the power of Go (
-Golang), Gin, and Gorm. Unleash the potential of your job openings management with this
-robust and cutting-edge solution.
+Golang), Gin, and Gorm.  
+Unleash the potential of your job openings management with this robust and cutting-edge
+solution.
 
-Explore the Swagger documentation and dive into the
+Explore the **Swagger documentation** and _dive into_ the
 details [here](http://swagger.junio.dev:8080/swagger/index.html).
 
 ## Table of Contents
