@@ -18,9 +18,12 @@ FROM alpine:latest
 WORKDIR /root/
 
 COPY --from=builder /app/main .
+COPY --from=builder /app/main .
 
 ARG PORT
-ENV PORT=8080
+ENV PORT=$PORT
 EXPOSE $PORT
+
+CMD ["sleep", "10"]
 
 CMD ["./main"]
