@@ -37,46 +37,46 @@ Ensure a seamless setup with the following prerequisites:
 ## Setup
 
 For docker-compose setup, just run:
-
-```sh
-docker-compose up
-```
+	
+	```sh
+	docker-compose up
+	```
 
 **For local setup, follow these steps:**
 
 1. Begin your journey by cloning the repository:
 
-```sh
-git clone https://github.com/devjunio/gojob
-cd gojob
-```
+	```sh
+	git clone https://github.com/devjunio/gojob
+	cd gojob
+	```
 
 2. Search for the necessary dependencies:
 
-```sh
-go mod download
-```
+	```sh
+	go mod download
+	```
 
 3. Establish a solid foundation by crafting a .env file in the project's root directory.
    Duplicate the .env.example file to achieve this:
-
-```sh
-cp .env.example .env
-```
+	
+	```sh
+	cp .env.example .env
+	```
 
 4. Tailor the environment variables in the .env file to match your distinctive
    requirements.
    Fortify your solution by building it:
-
-```sh
-go build -o gojob
-```
+	
+	```sh
+	go build -o gojob
+	```
 
 5. Ignite the engine and set your solution into motion:
 
-```sh
-./gojob
-```
+	```sh
+	./gojob
+	```
 
 _Your server will be operational at http://localhost:8080._
 
