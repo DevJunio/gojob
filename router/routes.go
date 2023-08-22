@@ -3,8 +3,6 @@ package router
 import (
 	"github.com/devjunio/gojob/docs"
 	"github.com/devjunio/gojob/service"
-	"os"
-
 	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -22,13 +20,6 @@ func setRouteConfig(router *gin.Engine, path ...string) {
 	opService := service.InitService()
 	baseRoute := "/openings"
 	logger.Info("Initializing routes")
-	if err := router.SetTrustedProxies([]string{
-		os.Getenv("PROXY_URL"),
-		"localhost",
-		"0.0.0.0",
-	}); err != nil {
-		return
-	}
 
 	{
 		v0.GET(baseRoute, opService.List)       // Get
