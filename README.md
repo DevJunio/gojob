@@ -38,9 +38,9 @@ Ensure a seamless setup with the following prerequisites:
 
 For docker-compose setup, just run:
 	
-	```sh
-	docker-compose up
-	```
+```sh
+docker-compose up
+```
 
 **For local setup, follow these steps:**
 
