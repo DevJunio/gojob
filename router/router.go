@@ -18,12 +18,12 @@ func Initialize() error {
 	logger = config.SetLogger("router")
 	route := gin.Default()
 
-	path = os.Getenv("APP_PATH")
+	path = os.Getenv("PATH")
 	if path == "" {
 		path = "0.0.0.0"
 	}
 
-	port = ":" + os.Getenv("APP_PORT")
+	port = ":" + os.Getenv("PORT")
 	if port == ":" {
 		port += "8080"
 	}
