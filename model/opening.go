@@ -18,30 +18,26 @@ type Opening struct {
 }
 
 type OpeningResponse struct {
-	ID        uint      `json:"id"`
-	CreatedAt time.Time `json:"createdAt"`
-	UpdatedAt time.Time `json:"updatedAt"`
-	DeletedAt time.Time `json:"deletedAt,omitempty"`
-	Role      string    `json:"role"`
-	Company   string    `json:"company"`
-	Location  string    `json:"location"`
-	Remote    bool      `json:"remote"`
-	Link      string    `json:"link"`
-	Salary    int64     `json:"salary"`
+	ID        uint      `json:"id" example:"1"`
+	CreatedAt time.Time `json:"createdAt" example:"2021-01-01T00:00:00Z"`
+	UpdatedAt time.Time `json:"updatedAt" example:"2021-01-01T00:00:00Z"`
+	DeletedAt time.Time `json:"deletedAt,omitempty" example:"2021-01-01T00:00:00Z"`
+	Role      string    `json:"role" example:"Software Engineer"`
+	Company   string    `json:"company" example:"Google"`
+	Location  string    `json:"location" example:"Remote"`
+	Remote    bool      `json:"remote" example:"true"`
+	Link      string    `json:"link" example:"https://google.com"`
+	Salary    int64     `json:"salary" example:"100000"`
 }
 
 type OpeningRequest struct {
-	Role     string `json:"role"`
-	Company  string `json:"company"`
-	Location string `json:"location"`
-	Remote   *bool  `json:"remote"`
-	Link     string `json:"link"`
-	Salary   int64  `json:"salary"`
+	Role     string `json:"role" example:"Software Engineer"`
+	Company  string `json:"company" example:"Google"`
+	Location string `json:"location" example:"Remote"`
+	Remote   *bool  `json:"remote" example:"true"`
+	Link     string `json:"link" example:"https://google.com"`
+	Salary   int64  `json:"salary" example:"100000"`
 }
-
-//
-// Opening
-//
 
 func (o *Opening) ToResponse() *OpeningResponse {
 	return &OpeningResponse{
@@ -58,18 +54,6 @@ func (o *Opening) ToResponse() *OpeningResponse {
 		Salary:   o.Salary,
 	}
 }
-
-//
-// OpeningResponses
-//
-
-// GetOpeningResponse returns a single OpeningResponse
-
-// ListOpeningResponse returns a list of OpeningResponse
-
-//
-// OpeningRequests
-//
 
 func (o *OpeningRequest) ToOpening() *Opening {
 	return &Opening{

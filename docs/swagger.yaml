@@ -2,46 +2,64 @@ definitions:
     model.OpeningRequest:
     properties:
       company:
+          example: Google
         type: string
       link:
+          example: https://google.com
         type: string
       location:
+          example: Remote
         type: string
       remote:
+          example: true
         type: boolean
       role:
+          example: Software Engineer
         type: string
       salary:
+          example: 100000
         type: integer
     type: object
     model.OpeningResponse:
     properties:
       company:
+          example: Google
         type: string
       createdAt:
+          example: "2021-01-01T00:00:00Z"
         type: string
       deletedAt:
+          example: "2021-01-01T00:00:00Z"
         type: string
       id:
+          example: 1
         type: integer
       link:
+          example: https://google.com
         type: string
       location:
+          example: Remote
         type: string
       remote:
+          example: true
         type: boolean
       role:
+          example: Software Engineer
         type: string
       salary:
+          example: 100000
         type: integer
       updatedAt:
+          example: "2021-01-01T00:00:00Z"
           type: string
     type: object
     router.ErrorResponse:
         properties:
             errorCode:
+                example: "404"
                 type: string
             message:
+                example: User not found
         type: string
     type: object
 info:
@@ -51,7 +69,7 @@ paths:
     delete:
       consumes:
       - application/json
-      description: Delete a new job opening
+      description: Delete a job opening resource based on its unique identifier.
       parameters:
       - description: Opening identification
         in: query
@@ -73,13 +91,13 @@ paths:
           description: Not Found
           schema:
               $ref: '#/definitions/router.ErrorResponse'
-      summary: Delete opening
+      summary: Remove Job Opening
       tags:
       - Openings
     get:
       consumes:
       - application/json
-      description: List all job opening
+      description: Retrieve a complete list of job openings stored in the system.
       produces:
       - application/json
       responses:
@@ -93,13 +111,13 @@ paths:
           description: Internal Server Error
           schema:
               $ref: '#/definitions/router.ErrorResponse'
-      summary: List Openings
+      summary: Retrieve Job Opening List
       tags:
       - Openings
     patch:
       consumes:
       - application/json
-      description: Update a job opening
+      description: Update an existing job opening with the provided changes.
       parameters:
       - description: Opening Identification
         in: query
@@ -131,17 +149,17 @@ paths:
           description: Internal Server Error
           schema:
               $ref: '#/definitions/router.ErrorResponse'
-      summary: Update opening
+      summary: Modify Job Opening
       tags:
       - Openings
     post:
       consumes:
       - application/json
-      description: Create a new job opening
+      description: Add a new job opening to the system using a JSON request.
       parameters:
           -   description: Opening data to create
         in: body
-            name: opening
+              name: opening
         required: true
         schema:
             $ref: '#/definitions/model.OpeningRequest'
@@ -160,14 +178,15 @@ paths:
             description: Not Found
           schema:
               $ref: '#/definitions/router.ErrorResponse'
-      summary: Create opening
+      summary: Initiate Job Opening Creation
       tags:
       - Openings
   /openings/:id:
     get:
       consumes:
       - application/json
-      description: Get first opening by ID
+      description: Fetch detailed information about the first job opening based on
+          its unique identifier.
       parameters:
       - description: Opening identification
         in: query
@@ -185,7 +204,7 @@ paths:
             description: Internal Server Error
           schema:
               $ref: '#/definitions/router.ErrorResponse'
-      summary: Get Openings
+      summary: Retrieve Job Opening Details by ID
       tags:
       - Openings
 swagger: "2.0"

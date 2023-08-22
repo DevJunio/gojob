@@ -17,7 +17,7 @@ func SetupRouter() *gin.Engine {
 	logger = config.SetLogger("router")
 	route := gin.Default()
 
-	path = os.Getenv("PATH")
+	path = os.Getenv("APP_PATH")
 	if path == "" {
 		path = "0.0.0.0"
 	}
@@ -43,6 +43,6 @@ func setDefaultRoute(path []string, route string) string {
 }
 
 type ErrorResponse struct {
-	Message   string `json:"message"`
-	ErrorCode string `json:"errorCode"`
+	Message   string `json:"message" example:"User not found"`
+	ErrorCode string `json:"errorCode" example:"404"`
 }

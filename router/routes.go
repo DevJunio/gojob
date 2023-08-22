@@ -8,11 +8,18 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-// @contact.name   Gojob
+// @title Gojob API
+// @description This is a sample server for Gojob.
+// @version 1
+// @host 0.0.0.0:8080
+// @BasePath /api/v1
+
+// @contact.name   Junio Santos
 // @contact.url    https://junio.dev/contact
 // @contact.email  contact@junio.dev
 
-// @license.name  GLP 3.0
+// @license.name  GPL 3.0
+// @license url https://www.gnu.org/licenses/gpl-3.0.en.html
 func setRouteConfig(router *gin.Engine, path ...string) {
 	basePath := setDefaultRoute(path, "/api/v1")
 	docs.SwaggerInfo.BasePath = basePath
@@ -22,11 +29,11 @@ func setRouteConfig(router *gin.Engine, path ...string) {
 	logger.Info("Initializing routes")
 
 	{
-		v0.GET(baseRoute, opService.List)       // Get
-		v0.GET(baseRoute+"/:id", opService.Get) // List
-		v0.POST(baseRoute, opService.Create)
-		v0.DELETE(baseRoute+"/:id", opService.Delete)
-		v0.PATCH(baseRoute+"/:id", opService.Update)
+		v0.GET(baseRoute, opService.List)             // Get by ID
+		v0.GET(baseRoute+"/:id", opService.Get)       // List all
+		v0.POST(baseRoute, opService.Create)          // Create
+		v0.DELETE(baseRoute+"/:id", opService.Delete) // Delete
+		v0.PATCH(baseRoute+"/:id", opService.Update)  // Update
 	}
 
 	router.GET("/ping", func(c *gin.Context) {

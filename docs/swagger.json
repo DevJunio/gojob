@@ -6,7 +6,7 @@
     "paths": {
         "/openings": {
             "get": {
-                "description": "List all job opening",
+                "description": "Retrieve a complete list of job openings stored in the system.",
                 "consumes": [
                     "application/json"
                 ],
@@ -16,27 +16,27 @@
                 "tags": [
                     "Openings"
                 ],
-                "summary": "List Openings",
+                "summary": "Retrieve Job Opening List",
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-							"type": "array",
-							"items": {
-								"$ref": "#/definitions/model.OpeningResponse"
-							}
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.OpeningResponse"
+                            }
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-							"$ref": "#/definitions/router.ErrorResponse"
+                            "$ref": "#/definitions/router.ErrorResponse"
                         }
                     }
                 }
             },
             "post": {
-                "description": "Create a new job opening",
+                "description": "Add a new job opening to the system using a JSON request.",
                 "consumes": [
                     "application/json"
                 ],
@@ -46,15 +46,15 @@
                 "tags": [
                     "Openings"
                 ],
-                "summary": "Create opening",
+                "summary": "Initiate Job Opening Creation",
                 "parameters": [
                     {
-						"description": "Opening data to create",
-						"name": "opening",
+                        "description": "Opening data to create",
+                        "name": "opening",
                         "in": "body",
                         "required": true,
                         "schema": {
-							"$ref": "#/definitions/model.OpeningRequest"
+                            "$ref": "#/definitions/model.OpeningRequest"
                         }
                     }
                 ],
@@ -62,25 +62,25 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-							"$ref": "#/definitions/model.OpeningResponse"
+                            "$ref": "#/definitions/model.OpeningResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-							"$ref": "#/definitions/router.ErrorResponse"
+                            "$ref": "#/definitions/router.ErrorResponse"
                         }
                     },
-					"404": {
-						"description": "Not Found",
+                    "404": {
+                        "description": "Not Found",
                         "schema": {
-							"$ref": "#/definitions/router.ErrorResponse"
+                            "$ref": "#/definitions/router.ErrorResponse"
                         }
                     }
                 }
             },
             "delete": {
-                "description": "Delete a new job opening",
+                "description": "Delete a job opening resource based on its unique identifier.",
                 "consumes": [
                     "application/json"
                 ],
@@ -90,7 +90,7 @@
                 "tags": [
                     "Openings"
                 ],
-                "summary": "Delete opening",
+                "summary": "Remove Job Opening",
                 "parameters": [
                     {
                         "type": "string",
@@ -104,25 +104,25 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-							"$ref": "#/definitions/model.OpeningResponse"
+                            "$ref": "#/definitions/model.OpeningResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-							"$ref": "#/definitions/router.ErrorResponse"
+                            "$ref": "#/definitions/router.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-							"$ref": "#/definitions/router.ErrorResponse"
+                            "$ref": "#/definitions/router.ErrorResponse"
                         }
                     }
                 }
             },
             "patch": {
-                "description": "Update a job opening",
+                "description": "Update an existing job opening with the provided changes.",
                 "consumes": [
                     "application/json"
                 ],
@@ -132,7 +132,7 @@
                 "tags": [
                     "Openings"
                 ],
-                "summary": "Update opening",
+                "summary": "Modify Job Opening",
                 "parameters": [
                     {
                         "type": "string",
@@ -147,7 +147,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-							"$ref": "#/definitions/model.OpeningRequest"
+                            "$ref": "#/definitions/model.OpeningRequest"
                         }
                     }
                 ],
@@ -155,33 +155,33 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-							"$ref": "#/definitions/model.OpeningResponse"
+                            "$ref": "#/definitions/model.OpeningResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-							"$ref": "#/definitions/router.ErrorResponse"
+                            "$ref": "#/definitions/router.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-							"$ref": "#/definitions/router.ErrorResponse"
+                            "$ref": "#/definitions/router.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-							"$ref": "#/definitions/router.ErrorResponse"
+                            "$ref": "#/definitions/router.ErrorResponse"
                         }
                     }
                 }
             }
         },
-		"/openings/:id": {
+        "/openings/:id": {
             "get": {
-				"description": "Get first opening by ID",
+                "description": "Fetch detailed information about the first job opening based on its unique identifier.",
                 "consumes": [
                     "application/json"
                 ],
@@ -191,13 +191,13 @@
                 "tags": [
                     "Openings"
                 ],
-				"summary": "Get Openings",
+                "summary": "Retrieve Job Opening Details by ID",
                 "parameters": [
                     {
-						"type": "string",
+                        "type": "string",
                         "description": "Opening identification",
                         "name": "id",
-						"in": "query",
+                        "in": "query",
                         "required": true
                     }
                 ],
@@ -205,13 +205,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-							"$ref": "#/definitions/model.OpeningResponse"
+                            "$ref": "#/definitions/model.OpeningResponse"
                         }
                     },
-					"500": {
-						"description": "Internal Server Error",
+                    "500": {
+                        "description": "Internal Server Error",
                         "schema": {
-							"$ref": "#/definitions/router.ErrorResponse"
+                            "$ref": "#/definitions/router.ErrorResponse"
                         }
                     }
                 }
@@ -219,72 +219,90 @@
         }
     },
     "definitions": {
-		"model.OpeningRequest": {
+        "model.OpeningRequest": {
             "type": "object",
             "properties": {
                 "company": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Google"
                 },
                 "link": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "https://google.com"
                 },
                 "location": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Remote"
                 },
                 "remote": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "example": true
                 },
                 "role": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Software Engineer"
                 },
                 "salary": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 100000
                 }
             }
         },
-		"model.OpeningResponse": {
+        "model.OpeningResponse": {
             "type": "object",
             "properties": {
                 "company": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Google"
                 },
                 "createdAt": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "2021-01-01T00:00:00Z"
                 },
                 "deletedAt": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "2021-01-01T00:00:00Z"
                 },
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 1
                 },
                 "link": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "https://google.com"
                 },
                 "location": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Remote"
                 },
                 "remote": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "example": true
                 },
                 "role": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Software Engineer"
                 },
                 "salary": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 100000
                 },
                 "updatedAt": {
-                    "type": "string"
-				}
-			}
-		},
-		"router.ErrorResponse": {
-			"type": "object",
-			"properties": {
-				"errorCode": {
-					"type": "string"
-				},
-				"message": {
-					"type": "string"
+                    "type": "string",
+                    "example": "2021-01-01T00:00:00Z"
+                }
+            }
+        },
+        "router.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "errorCode": {
+                    "type": "string",
+                    "example": "404"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "User not found"
                 }
             }
         }

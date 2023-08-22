@@ -18,7 +18,7 @@ const docTemplate = `{
     "paths": {
         "/openings": {
             "get": {
-                "description": "List all job opening",
+                "description": "Retrieve a complete list of job openings stored in the system.",
                 "consumes": [
                     "application/json"
                 ],
@@ -28,7 +28,7 @@ const docTemplate = `{
                 "tags": [
                     "Openings"
                 ],
-                "summary": "List Openings",
+                "summary": "Retrieve Job Opening List",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -48,7 +48,7 @@ const docTemplate = `{
                 }
             },
             "post": {
-                "description": "Create a new job opening",
+                "description": "Add a new job opening to the system using a JSON request.",
                 "consumes": [
                     "application/json"
                 ],
@@ -58,7 +58,7 @@ const docTemplate = `{
                 "tags": [
                     "Openings"
                 ],
-                "summary": "Create opening",
+                "summary": "Initiate Job Opening Creation",
                 "parameters": [
                     {
                         "description": "Opening data to create",
@@ -92,7 +92,7 @@ const docTemplate = `{
                 }
             },
             "delete": {
-                "description": "Delete a new job opening",
+                "description": "Delete a job opening resource based on its unique identifier.",
                 "consumes": [
                     "application/json"
                 ],
@@ -102,7 +102,7 @@ const docTemplate = `{
                 "tags": [
                     "Openings"
                 ],
-                "summary": "Delete opening",
+                "summary": "Remove Job Opening",
                 "parameters": [
                     {
                         "type": "string",
@@ -134,7 +134,7 @@ const docTemplate = `{
                 }
             },
             "patch": {
-                "description": "Update a job opening",
+                "description": "Update an existing job opening with the provided changes.",
                 "consumes": [
                     "application/json"
                 ],
@@ -144,7 +144,7 @@ const docTemplate = `{
                 "tags": [
                     "Openings"
                 ],
-                "summary": "Update opening",
+                "summary": "Modify Job Opening",
                 "parameters": [
                     {
                         "type": "string",
@@ -193,7 +193,7 @@ const docTemplate = `{
         },
         "/openings/:id": {
             "get": {
-                "description": "Get first opening by ID",
+                "description": "Fetch detailed information about the first job opening based on its unique identifier.",
                 "consumes": [
                     "application/json"
                 ],
@@ -203,7 +203,7 @@ const docTemplate = `{
                 "tags": [
                     "Openings"
                 ],
-                "summary": "Get Openings",
+                "summary": "Retrieve Job Opening Details by ID",
                 "parameters": [
                     {
                         "type": "string",
@@ -235,22 +235,28 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "company": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Google"
                 },
                 "link": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "https://google.com"
                 },
                 "location": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Remote"
                 },
                 "remote": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "example": true
                 },
                 "role": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Software Engineer"
                 },
                 "salary": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 100000
                 }
             }
         },
@@ -258,34 +264,44 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "company": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Google"
                 },
                 "createdAt": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "2021-01-01T00:00:00Z"
                 },
                 "deletedAt": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "2021-01-01T00:00:00Z"
                 },
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 1
                 },
                 "link": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "https://google.com"
                 },
                 "location": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Remote"
                 },
                 "remote": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "example": true
                 },
                 "role": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Software Engineer"
                 },
                 "salary": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 100000
                 },
                 "updatedAt": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "2021-01-01T00:00:00Z"
                 }
             }
         },
@@ -293,10 +309,12 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "errorCode": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "404"
                 },
                 "message": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "User not found"
                 }
             }
         }

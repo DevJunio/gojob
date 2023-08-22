@@ -25,10 +25,14 @@ var (
 	logger *config.Logger
 )
 
-// Get
+// Get Job Opening by ID
 //
-//	@Summary		Get Openings
-//	@Description	Get first opening by ID
+// Retrieves detailed information about the first job opening using its unique identifier.
+// This endpoint offers a comprehensive view of a specific employment opportunity.
+//
+// @Summary Retrieve Job Opening Details by ID
+// @Description Fetch detailed information about the first job opening based on its unique identifier.
+//
 //	@Tags			Openings
 //	@Accept			json
 //	@Produce		json
@@ -55,10 +59,14 @@ func (o *OpeningService) Get(ctx *gin.Context) {
 	sendSuccess(ctx, response)
 }
 
-// List
+// List Job Openings
 //
-//	@Summary		List Openings
-//	@Description	List all job opening
+// Retrieves a comprehensive list of all available job openings in the system.
+// This endpoint provides an overview of current employment opportunities.
+//
+// @Summary Retrieve Job Opening List
+// @Description Retrieve a complete list of job openings stored in the system.
+//
 //	@Tags			Openings
 //	@Accept			json
 //	@Produce		json
@@ -77,10 +85,13 @@ func (o *OpeningService) List(ctx *gin.Context) {
 	sendSuccess(ctx, openings)
 }
 
-// Create
+// Create Job Opening
 //
-//	@Summary		Create opening
-//	@Description	Create a new job opening
+// Initiates the creation of a new job opening resource by processing a JSON request.
+// This endpoint enables the addition of fresh employment opportunities to the system.
+//
+//	@Summary		Initiate Job Opening Creation
+//	@Description	Add a new job opening to the system using a JSON request.
 //	@Tags			Openings
 //	@Accept			json
 //	@Produce		json
@@ -115,10 +126,14 @@ func (o *OpeningService) Create(ctx *gin.Context) {
 	sendSuccess(ctx, response)
 }
 
-// Delete
+// Delete Job Opening
 //
-//	@Summary		Delete opening
-//	@Description	Delete a new job opening
+// Removes a job opening from the system using its designated identifier.
+// This endpoint facilitates the removal of a specific employment opportunity.
+//
+// @Summary Remove Job Opening
+// @Description Delete a job opening resource based on its unique identifier.
+//
 //	@Tags			Openings
 //	@Accept			json
 //	@Produce		json
@@ -145,10 +160,14 @@ func (o *OpeningService) Delete(ctx *gin.Context) {
 	sendSuccess(ctx, response)
 }
 
-// Update
+// Update Job Opening
 //
-//	@Summary		Update opening
-//	@Description	Update a job opening
+// Modifies an existing job opening in the system using appropriate changes provided in the request.
+// This endpoint facilitates the adjustment of details for a specific employment opportunity.
+//
+// @Summary Modify Job Opening
+// @Description Update an existing job opening with the provided changes.
+//
 //	@Tags			Openings
 //	@Accept			json
 //	@Produce		json
