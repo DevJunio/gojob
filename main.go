@@ -15,7 +15,7 @@ func main() {
 	log = config.SetLogger("main")
 
 	if err := godotenv.Load(".env"); err != nil {
-		log.Info("No .env found")
+		log.Warn("No .env found")
 	}
 
 	if err := repository.InitDatabase(); err != nil {
@@ -23,7 +23,10 @@ func main() {
 		return
 	}
 
-	if err := router.Initialize(); err != nil {
+	route := router.SetupRouter()
+
+	err := route.Run(router.Fullpath)
+	if err != nil {
 		log.Errorf("router initialization error: %v", err)
 		return
 	}

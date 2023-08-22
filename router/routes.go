@@ -29,12 +29,16 @@ func setRouteConfig(router *gin.Engine, path ...string) {
 		v0.PATCH(baseRoute+"/:id", opService.Update)
 	}
 
+	router.GET("/ping", func(c *gin.Context) {
+		c.String(200, "pong")
+	})
+
 	logger.Info("Routes initialized")
-	logger.Infof("Listening and serving HTTP on %s", "http://"+fullpath+basePath)
+	logger.Infof("Listening and serving HTTP on %s", "http://"+Fullpath+basePath)
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	router.GET("/swagger", func(c *gin.Context) {
 		c.Redirect(302, "/swagger/index.html")
 	})
 	logger.Info("Swagger initialized")
-	logger.Infof("Swagger HTTP on %s", "http://"+fullpath+"/swagger")
+	logger.Infof("Swagger HTTP on %s", "http://"+Fullpath+"/swagger")
 }

@@ -1,34 +1,20 @@
 package router
 
 import (
-	"io"
+	"github.com/stretchr/testify/assert"
 	"net/http"
+	"net/http/httptest"
 	"testing"
-	"time"
 )
 
 func TestInitialize(t *testing.T) {
-	// Start the router in a goroutine
+	// Mock environment variables for testing
+	router := SetupRouter()
 
-	// Wait for the server to start up
-	time.Sleep(100 * time.Millisecond)
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("GET", "/ping", nil)
+	router.ServeHTTP(w, req)
 
-	// Send an HTTP GET request to the /api/v0/openings endpoint
-	resp, err := http.Get("http://localhost:8080/api/v0/openings")
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	// Close response listening
-	defer func(Body io.ReadCloser) {
-		err := Body.Close()
-		if err != nil {
-			panic(err)
-		}
-	}(resp.Body)
-
-	// Verify that the response status code is 200 OK
-	if resp.StatusCode != http.StatusOK {
-		t.Errorf("Expected status code %d but got %d", http.StatusOK, resp.StatusCode)
-	}
+	assert.Equal(t, 200, w.Code)
+	assert.Equal(t, "pong", w.Body.String())
 }

@@ -2,19 +2,18 @@ package router
 
 import (
 	"github.com/devjunio/gojob/config"
-	"os"
-
 	"github.com/gin-gonic/gin"
+	"os"
 )
 
 var (
 	logger   *config.Logger
 	path     string
 	port     string
-	fullpath string
+	Fullpath string
 )
 
-func Initialize() error {
+func SetupRouter() *gin.Engine {
 	logger = config.SetLogger("router")
 	route := gin.Default()
 
@@ -28,16 +27,11 @@ func Initialize() error {
 		port += "8080"
 	}
 
-	fullpath = path + port
+	Fullpath = path + port
 
 	setRouteConfig(route)
-	err := route.Run(fullpath)
-	if err != nil {
-		logger.Error("error: initializing route on router.go")
-		return err
-	}
 
-	return nil
+	return route
 }
 
 func setDefaultRoute(path []string, route string) string {
